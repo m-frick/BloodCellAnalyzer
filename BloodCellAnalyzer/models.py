@@ -1,30 +1,30 @@
 import numpy as np
 import os
 from tensorflow.keras.models import load_model
-from BloodCellAnalyzer.rbc_seg import cell_crop
+from BloodCellAnalyzer.data import img_seg
 
 
-class Creator():
+class malaria():
 
     def __init__(self):
-        pass
+        self.model = None
+        self.X = 0
 
+    def create_model(self, model):
 
-    def load_malaria(self, model):
-        """Loads pretrained model
-            params{
-            model str: either "leo" or "henry
-            "henry takes grayscale as input, leo rgb"
-        """
-
-        path = os.path.join(os.path.dirname(__file__), "../",
-                            "models/",
-                            "malaria_cnn_models",
-                            str(model))
+        path = os.path.join(os.path.dirname(__file__), "../", "models/",
+                            "malaria_cnn_models", str(model))
 
         model = load_model(path)
 
         for layer in model.layers:
             layer.trainable = False
 
-        return model
+        self.model = model
+
+
+    def predict(self, path_X):
+
+        self.X = img_seg(path_X)
+        pred = self.model.predict(self.X)
+        return pred
