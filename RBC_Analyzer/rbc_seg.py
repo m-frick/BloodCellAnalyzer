@@ -82,6 +82,9 @@ def cell_crop(path):
     bs, markers = rbc(path)
 
     regions = measure.regionprops(markers, intensity_image=bs)
-
+    #Region Of Interest
+    list_ROI = []
     for prop in regions:
-        plt.imshow(prop.intensity_image)
+        list_ROI.append(prop.intensity_image)
+
+    return list_ROI
