@@ -1,25 +1,29 @@
 import numpy as np
 import os
 from tensorflow import expand_dims
-from tensorflow.keras.utils import load_img, img_to_array
+from tensorflow import image
+from BloodCellAnalyzer.rbc_seg import cell_crop
 
 
-def get_data():
+def img_seg(path):
 
-    path = os.path.join(os.path.dirname(__file__), "images/")
+    """Returns nd_array of shape (number of RBC on image, 128,128,1)"""
 
-    data = []
+    list_ROI = cell_crop(path)
 
-    for image in os.listdir(path):
-        image_path = path + image
-        img = load_img(image_path, target_size=(128, 128))
-        img_array = img_to_array(img)
-        img_array = expand_dims(img_array, 0)
-        data.append(img_array)
+    img_list = []
 
-    return np.vstack(data)
+    for img in list_ROI[1:]:
+        img_re = image.resize(img/255, [128,128])
+        img_re = image.rgb_to_grayscale(img_re)
+        img_re = expand_dims(img_re, 0)
+        img_list.append(img_re)
+
+    img_array = np.vstack(img_list)
+
+    return np.vstack(img_array)
 
 
 
 if __name__ == '__main__':
-    df = get_data()
+    data = img_seg()

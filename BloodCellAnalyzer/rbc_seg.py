@@ -5,14 +5,9 @@ from skimage.segmentation import clear_border
 import matplotlib.pyplot as plt
 from skimage import measure
 
-#from PIL import Image
 
-#function for segmentation of RBC with watershed plus cell cropping#
-
-
-#function for segmentation returns the original image with segmentated cells
-#plus it returns the markers, which are needed for the cropping
 def rbc(path):
+    """Returns markers and bs for image segmentation"""
     #bs stands for blood smear
     bs = cv2.imread(path)
 
