@@ -5,11 +5,9 @@ from BloodCellAnalyzer.rbc_seg import cell_crop
 from tensorflow import expand_dims
 
 
-def img_seg(path):
+def img_seg(list_ROI):
 
     """Returns nd_array of shape (number of RBC on image, 128,128,1)"""
-
-    list_ROI = cell_crop(path)
 
     img_list = []
 
@@ -24,4 +22,4 @@ def img_seg(path):
     return img_array
 
 if __name__ == '__main__':
-    data = img_seg()
+    img_array = img_seg()
