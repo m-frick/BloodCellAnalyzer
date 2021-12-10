@@ -8,6 +8,11 @@ wheel>=0.29
 numpy
 pandas
 scikit-learn
+opencv-python>=4.5.4.60
+scikit-image
+matplotlib
+tensorflow
+python-multipart
 
 # tests/linter
 black
@@ -29,3 +34,4 @@ six>=1.14
 joblib
 memoized-property
 termcolor
+Pillow
