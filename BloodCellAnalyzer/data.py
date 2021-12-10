@@ -1,5 +1,4 @@
 import numpy as np
-import os
 from tensorflow import expand_dims
 from tensorflow import image
 
@@ -24,4 +23,4 @@ def img_seg(list_ROI):
 
 
 if __name__ == '__main__':
-    data = img_seg()
+    img_array = img_seg()
